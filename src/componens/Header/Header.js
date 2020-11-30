@@ -13,10 +13,10 @@ const HeaderContainer = styled.header`
 const Header = () => {
     return (
         <HeaderContainer className="app-header">
-            <Col span={18}>
+            <Col span={16}>
                 <Typography.Title className="app-header__title" level={3}>Планировщик задач</Typography.Title>
             </Col>
-            <Col span={6}>
+            <Col span={8}>
                 <Input className="app-header__input" size="large" placeholder="Поиск"
                        suffix={<SearchOutlined/>}/>
             </Col>

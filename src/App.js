@@ -6,7 +6,7 @@ import './theme/App.sass'
 
 import TodoList from './componens/TodoList/TodoList'
 import Header from './componens/Header/Header'
-import AddTask from './componens/AddTask/AddTask'
+import AddTodo from './componens/AddTodo/AddTodo'
 
 const ContentContainer = styled.div`
     background: #F3F3F3;
@@ -22,7 +22,7 @@ const App = () => {
                     <Col span={12} offset={6}>
                         <ContentContainer>
                             <Header/>
-                            <AddTask/>
+                            <AddTodo/>
                             <Col span={24}>
                                 <TodoList/>
                             </Col>
