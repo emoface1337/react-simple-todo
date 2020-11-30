@@ -15,9 +15,11 @@ const TodoList = () => {
                 itemLayout="horizontal"
                 dataSource={todoItems}
                 locale={{ emptyText: 'Ничего нет :)' }}
-                renderItem={item => (
-                    <TodoItem item={item}/>
-                )}
+                renderItem={
+                    item => (
+                        <TodoItem item={item}/>
+                    )
+                }
             />
             <Checkbox>Все задачи выполнены</Checkbox>
         </>

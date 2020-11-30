@@ -35,7 +35,7 @@ const AddTodo = () => {
             </Col>
             <Col span={6}>
                 <Button type="primary" icon={<PlusOutlined/>} size="large"
-                        onClick={event => onAddTodo(event)}
+                        onClick={() => onAddTodo()}
                 >
                     Добавить задачу
                 </Button>

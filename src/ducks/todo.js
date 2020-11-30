@@ -1,13 +1,20 @@
+import { List } from 'immutable'
+
 const ADD_TODO = 'TODO/ADD_TODO'
-// const DELETE_TODO = 'TODO/DELETE_TODO'
+const DELETE_TODO = 'TODO/DELETE_TODO'
 
 export const addTodo = text => ({
     type: ADD_TODO,
     payload: text
 })
 
+export const deleteTodo = id => ({
+    type: DELETE_TODO,
+    payload: id
+})
+
 const initialState = {
-    data: [
+    data: List([
         {
             id: 1,
             text: 'Взять автограф у Джареда Лето',
@@ -27,7 +34,7 @@ const initialState = {
             completed: false,
             favorite: true
         }
-    ]
+    ])
 }
 
 
@@ -42,10 +49,15 @@ export const todoReducer = (state = initialState, action) => {
                 completed: false,
                 favorite: false
             }
-
             return {
-                ...state,
-                data: [newItem, ...state.data]
+                data: state.data.unshift(newItem)
+            }
+        }
+
+        case DELETE_TODO: {
+            const itemIndex = state.data.findIndex(item => item.id === action.payload)
+            return {
+                data: state.data.delete(itemIndex)
             }
         }
 
