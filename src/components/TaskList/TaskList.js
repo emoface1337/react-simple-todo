@@ -31,7 +31,9 @@ const TaskList = () => {
                         )
                     }
                 />
-                <Checkbox onClick={onCheckCompletedAllTasks} checked={isAllTasksCompleted}>Все задачи выполнены</Checkbox>
+                {
+                    tasks.size !== 0 ? <Checkbox onClick={onCheckCompletedAllTasks} checked={isAllTasksCompleted}>Все задачи выполнены</Checkbox> : null
+                }
             </Col>
         </Row>
     )
