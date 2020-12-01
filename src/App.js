@@ -4,14 +4,14 @@ import { Col, Row } from 'antd'
 
 import './theme/App.sass'
 
-import TodoList from './components/TodoList/TodoList'
+import TaskList from './components/TaskList/TaskList'
 import Header from './components/Header/Header'
-import AddTodo from './components/AddTodo/AddTodo'
+import AddTask from './components/AddTask/AddTask'
 
 const ContentContainer = styled.div`
-    background: #F3F3F3;
-    padding: 50px 75px;
-    border-radius: 10px
+  background: #F3F3F3;
+  padding: 50px 75px;
+  border-radius: 10px
 `
 
 const App = () => {
@@ -22,10 +22,8 @@ const App = () => {
                     <Col span={12} offset={6}>
                         <ContentContainer>
                             <Header/>
-                            <AddTodo/>
-                            <Col span={24}>
-                                <TodoList/>
-                            </Col>
+                            <AddTask/>
+                            <TaskList/>
                         </ContentContainer>
                     </Col>
                 </Row>

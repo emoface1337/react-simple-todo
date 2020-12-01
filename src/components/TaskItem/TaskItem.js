@@ -1,16 +1,22 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteTask, editTodoText, setFavoriteTask } from '../../ducks/todo'
+import { deleteTask, editTaskText, setFavoriteTask, setTaskCompleted } from '../../ducks/task'
 
 import { DeleteTwoTone, EditOutlined, StarFilled, StarTwoTone } from '@ant-design/icons'
 import { Checkbox, Input, List } from 'antd'
 
 import TodoActionIcon from '../../custom-components/TodoIcon'
 
-const TodoItem = ({ task }) => {
+const defaultListStyles = {
+    fontSize: '18px',
+    display: 'flex'
+}
+
+const TaskItem = ({ task }) => {
 
     const taskText = task.get('text')
     const taskId = task.get('id')
+    const taskCompleted = task.get('completed')
 
     const [editMode, setEditMode] = useState(false)
     const [inputValue, setInputValue] = useState(taskText)
@@ -27,7 +33,7 @@ const TodoItem = ({ task }) => {
         dispatch(setFavoriteTask(taskId))
     }
 
-    const onEditTodo = () => {
+    const onEditTask = () => {
         // ant design is crap
         setTimeout(() => {
             inputRef.current.focus()
@@ -35,24 +41,31 @@ const TodoItem = ({ task }) => {
         setEditMode(true)
     }
 
+    const onSetTaskCompleted = () => {
+        dispatch(setTaskCompleted(taskId))
+    }
+
     const onBlurInput = () => {
-        dispatch(editTodoText(taskId, inputValue))
+        if (inputValue !== taskText) {
+            dispatch(editTaskText(taskId, inputValue))
+        }
         setEditMode(false)
     }
 
     return (
         <List.Item
-            style={{ fontSize: '18px', display: 'flex' }}
+            style={taskCompleted ? { background: '#E9E9E9', ...defaultListStyles } : { background: 'white', ...defaultListStyles }}
             actions={
                 [
                     task.get('favorite')
                         ? <TodoActionIcon clickAction={onSetFavoriteTask}><StarFilled/></TodoActionIcon>
-                        : <TodoActionIcon clickAction={onSetFavoriteTask}><StarTwoTone/></TodoActionIcon>,
-                    <TodoActionIcon clickAction={onEditTodo}><EditOutlined/></TodoActionIcon>,
+                        : <TodoActionIcon clickAction={onSetFavoriteTask}><StarTwoTone
+                            twoToneColor="#eb2f96"/></TodoActionIcon>,
+                    <TodoActionIcon clickAction={onEditTask}><EditOutlined/></TodoActionIcon>,
                     <TodoActionIcon clickAction={onDeleteTask}><DeleteTwoTone/></TodoActionIcon>
                 ]
             }>
-            <Checkbox style={{ marginRight: '15px' }}/>
+            <Checkbox onClick={onSetTaskCompleted} style={{ marginRight: '15px' }} checked={taskCompleted}/>
             <Input value={inputValue}
                    disabled={!editMode}
                    ref={inputRef}
@@ -66,4 +79,4 @@ const TodoItem = ({ task }) => {
     )
 }
 
-export default TodoItem
+export default TaskItem

@@ -1,9 +1,9 @@
 import { combineReducers, createStore } from 'redux'
-import { todoReducer as todo } from './todo'
+import { taskReducer as task } from './task'
 import { enhancedStore } from './middleware'
 
 const rootReducer = combineReducers({
-    todo
+    task
 })
 
 const store = createStore(rootReducer, enhancedStore)
