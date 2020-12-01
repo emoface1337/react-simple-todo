@@ -1,8 +1,9 @@
 import React from 'react'
-import { Checkbox, List } from 'antd'
+import { Checkbox, List as TodoListComponent } from 'antd'
+import { useSelector } from 'react-redux'
 
 import TodoItem from '../TodoItem/TodoItem'
-import { useSelector } from 'react-redux'
+
 
 const TodoList = () => {
 
@@ -10,14 +11,14 @@ const TodoList = () => {
 
     return (
         <>
-            <List
+            <TodoListComponent
                 style={{ marginBottom: '25px' }}
                 itemLayout="horizontal"
                 dataSource={todoItems}
                 locale={{ emptyText: 'Ничего нет :)' }}
                 renderItem={
                     item => (
-                        <TodoItem item={item}/>
+                        <TodoItem task={item} key={item.id}/>
                     )
                 }
             />

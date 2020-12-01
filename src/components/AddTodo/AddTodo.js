@@ -4,7 +4,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 
 import styled from 'styled-components'
-import { addTodo } from '../../ducks/todo'
+import { addTask } from '../../ducks/todo'
 
 const AddTaskContainer = styled.div`
     display: flex;
@@ -22,7 +22,7 @@ const AddTodo = () => {
     const onAddTodo = () => {
         const text = inputValue
         if (text !== '') {
-            dispatch(addTodo(text))
+            dispatch(addTask(text))
             setInputValue('')
         }
     }

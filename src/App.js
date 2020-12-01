@@ -4,9 +4,9 @@ import { Col, Row } from 'antd'
 
 import './theme/App.sass'
 
-import TodoList from './componens/TodoList/TodoList'
-import Header from './componens/Header/Header'
-import AddTodo from './componens/AddTodo/AddTodo'
+import TodoList from './components/TodoList/TodoList'
+import Header from './components/Header/Header'
+import AddTodo from './components/AddTodo/AddTodo'
 
 const ContentContainer = styled.div`
     background: #F3F3F3;
