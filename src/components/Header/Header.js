@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Col, Input, Row, Typography } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
-import { setSearchTerm } from '../../ducks/task'
+import { setSearchTerm } from '../../ducks/tasks'
 
 const HeaderContainer = styled.header`
   margin-bottom: 25px

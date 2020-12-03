@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
+
 import { Button, Col, Input, Row } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { useDispatch } from 'react-redux'
 
-import styled from 'styled-components'
-import { addTask } from '../../ducks/task'
+import { addTaskThunk } from '../../ducks/tasks'
 
 const AddTaskContainer = styled.div`
   margin-bottom: 25px
@@ -19,7 +20,7 @@ const AddTask = () => {
     const onAddTodo = () => {
         const text = inputValue
         if (text !== '') {
-            dispatch(addTask(text))
+            dispatch(addTaskThunk(text))
             setInputValue('')
         }
     }
@@ -32,7 +33,9 @@ const AddTask = () => {
                            placeholder="Описание новой задачи" onChange={event => setInputValue(event.target.value)}/>
                 </Col>
                 <Col span={7}>
-                    <Button type="primary" icon={<PlusOutlined/>} style={{ width: '100%', height: '100%'}} onClick={() => onAddTodo()}>
+                    <Button type="primary" icon={<PlusOutlined/>}
+                            style={{ width: '100%', height: '100%' }}
+                            onClick={() => onAddTodo()}>
                         Добавить задачу
                     </Button>
                 </Col>

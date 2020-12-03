@@ -1,5 +1,5 @@
 import { combineReducers, createStore } from 'redux'
-import { taskReducer as task } from './task'
+import { taskReducer as task } from './tasks'
 import { enhancedStore } from './middleware'
 
 const rootReducer = combineReducers({

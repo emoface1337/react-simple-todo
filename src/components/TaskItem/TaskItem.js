@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteTask, editTaskText, setFavoriteTask, setTaskCompleted } from '../../ducks/task'
 
 import { DeleteTwoTone, EditOutlined, StarFilled, StarTwoTone } from '@ant-design/icons'
 import { Checkbox, Input, List } from 'antd'
 
 import TodoActionIcon from '../../custom-components/TodoIcon'
+
+import { deleteTaskThunk, editTaskTextThunk, setTaskCompletedThunk, setTaskFavoriteThunk } from '../../ducks/tasks'
 
 const defaultListStyles = {
     fontSize: '18px',
@@ -17,6 +18,7 @@ const TaskItem = ({ task }) => {
     const taskText = task.get('text')
     const taskId = task.get('id')
     const taskCompleted = task.get('completed')
+    const taskFavorite = task.get('favorite')
 
     const [editMode, setEditMode] = useState(false)
     const [inputValue, setInputValue] = useState(taskText)
@@ -26,11 +28,11 @@ const TaskItem = ({ task }) => {
     const dispatch = useDispatch()
 
     const onDeleteTask = () => {
-        dispatch(deleteTask(taskId))
+        dispatch(deleteTaskThunk(taskId))
     }
 
     const onSetFavoriteTask = () => {
-        dispatch(setFavoriteTask(taskId))
+        dispatch(setTaskFavoriteThunk(taskId, !taskFavorite))
     }
 
     const onEditTask = () => {
@@ -42,12 +44,12 @@ const TaskItem = ({ task }) => {
     }
 
     const onSetTaskCompleted = () => {
-        dispatch(setTaskCompleted(taskId))
+        dispatch(setTaskCompletedThunk(taskId, !taskCompleted))
     }
 
     const onBlurInput = () => {
         if (inputValue !== taskText) {
-            dispatch(editTaskText(taskId, inputValue))
+            dispatch(editTaskTextThunk(taskId, inputValue))
         }
         setEditMode(false)
     }
@@ -57,7 +59,7 @@ const TaskItem = ({ task }) => {
             style={taskCompleted ? { background: '#E9E9E9', ...defaultListStyles } : { background: 'white', ...defaultListStyles }}
             actions={
                 [
-                    task.get('favorite')
+                    taskFavorite
                         ? <TodoActionIcon clickAction={onSetFavoriteTask}><StarFilled/></TodoActionIcon>
                         : <TodoActionIcon clickAction={onSetFavoriteTask}><StarTwoTone
                             twoToneColor="#eb2f96"/></TodoActionIcon>,
